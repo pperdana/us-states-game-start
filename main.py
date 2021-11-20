@@ -24,7 +24,6 @@ while len(correct_states) < 50:
                                     prompt="What is another state's name").title()
     if answer_state == "Exit":
         break
-
     if answer_state in states and answer_state not in correct_states:
         x_pos = int(data[data.state == answer_state].x)
         y_pos = int(data[data.state == answer_state].y)
@@ -33,9 +32,7 @@ while len(correct_states) < 50:
 
         correct_states.append(answer_state)
 
-for state in states:
-    if state not in correct_states:
-        miss_states.append(state)
+miss_states = [state for state in states if state not in correct_states]
 
 s = pandas.Series(miss_states)
 s.to_csv("Missing states.csv")
